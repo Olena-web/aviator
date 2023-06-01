@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/state.models';
 import { Observable } from 'rxjs';
-//import { EditService } from '../../services/edit.service';
 import { EditModeService } from '../../../shared/services/edit-mode.service';
 
 @Component({
@@ -34,7 +33,6 @@ export class SecondMenuComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private editModeService: EditModeService,
-    // private editService: EditService
   ) { }
 
   ngOnInit() {
@@ -46,9 +44,10 @@ export class SecondMenuComponent implements OnInit {
       this.airoportTo = state.trip.destinationAiroportName;
       this.startDate = state.trip.outboundDepartureDate;
       this.endDate = state.trip.returnDepartureDate;
-      this.people = state.trip.numberOfPassengers[0]?.quantity +
-        state.trip.numberOfPassengers[1]?.quantity +
-        state.trip.numberOfPassengers[2]?.quantity;
+      if (state.trip.numberOfPassengers !== undefined && state.trip.numberOfPassengers.length !== 0)
+        this.people = state.trip.numberOfPassengers[0]?.quantity +
+          state.trip.numberOfPassengers[1]?.quantity +
+          state.trip.numberOfPassengers[2]?.quantity;
     });
     this.isEdit = false;
 
@@ -66,5 +65,4 @@ export class SecondMenuComponent implements OnInit {
       this.editModeService.isEdit$.next(this.isEdit);
     }
   }
-
 }

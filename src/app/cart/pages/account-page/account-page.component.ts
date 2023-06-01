@@ -53,7 +53,6 @@ export class AccountPageComponent implements OnInit {
     this.colDefs = [
       {
         headerName: 'No.',
-        checkboxSelection: true,
         onCellClicked: this.onCellClicked.bind(this),
         width: 120,
         showDisabledCheckboxes: true,
@@ -204,8 +203,6 @@ function dateTimeGetter(params: ValueGetterParams) {
     month: "long",
     day: "numeric",
   } as const;
-  console.log(typeof params.data.outboundDepartureDate);
-  console.log(params.data.outboundDepartureDate);
   return (new Date(params.data.outboundDepartureDate).toLocaleString('en-GB', options))
     // + ', ' + params.data.outboundDepartureTime
     // + ' - ' + params.data.outboundArrivalTime
